@@ -36,8 +36,8 @@ export default class PaperComponent extends React.Component{
         window.cxt = new AudioContext();
         window.source = null;
         window.audioBuffer = null;
-
-
+        window.gainNode=  cxt.createGain();
+        this.runTime =0;
     }
 
     handleChangeMusic(curMusic){
@@ -66,6 +66,8 @@ export default class PaperComponent extends React.Component{
 
                     cxt.decodeAudioData(response.data,  (buffer)=> {
                         this.stopTime = 0;
+                        this.beforeTime = 0;
+                        this.runTime =0;
                         audioBuffer = buffer;
                         this.decodePlayMusic();
 
@@ -83,15 +85,19 @@ export default class PaperComponent extends React.Component{
         this.setState({
             isPlaying:true
         })  ;
-        let sTime = this.stopTime;
-        console.log(sTime);
+        let sTime = this.runTime;
+        this.beforeTime = cxt.currentTime;
         source = cxt.createBufferSource();
-        let gainNode=  cxt.createGain();
-        gainNode.connect(cxt.destination);
+
+
+
         source.buffer = audioBuffer;
+
         source.connect(gainNode);
-        console.log(source.playbackRate);
-        source.start(0,sTime%audioBuffer.duration);
+        gainNode.connect(cxt.destination);
+        // console.log(source.playbackRate);
+        console.log(sTime);
+        source.start(0,sTime%source.buffer.duration);
 
 
     }
@@ -100,8 +106,11 @@ export default class PaperComponent extends React.Component{
 
         if(this.state.isPlaying){
             this.stopTime = stop||cxt.currentTime;
-            console.log(this.stopTime);
+            this.runTime += this.stopTime-this.beforeTime;
+            console.log(this.runTime);
+
             source.stop();
+
             this.setState({
                 isPlaying:!this.state.isPlaying
             })  ;
