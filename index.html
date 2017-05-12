@@ -2,11 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
     <style>
         .ani{
+            height:300px;
+            width: 300px ;
+            margin: 10% 5%;
+            text-align: center;
             animation: rotateAllTime 5s linear infinite;
 
+        }
+        .smallCir{
+            height:150px;
+            width: 150px;
+            text-align: center;
+            display: inline-block;
+            margin:75px;
+            overflow:hidden;
+            position:relative
+        }
+        .smallImg{
+            width: 150px;
+            height: 150px;
         }
         @keyframes rotateAllTime{
             0%{
@@ -15,6 +33,64 @@
             }
             100%{
                 transform:rotate(360deg)
+            }
+        }
+        .lrc{
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            margin: 10% 5%;
+            text-align: center;
+            line-height:300px;
+
+        }
+        .play{
+            display:flex;
+            flex-direction:row;
+        }
+        .threeButton{
+            display: flex;
+            justify-content: space-between;
+            width:100%
+        }
+        .threeAndVoice{
+            display: inline-block;
+            width: 25%;
+        }
+        @media  (max-width: 700px){
+            .play{
+                display: block;
+            }
+            .threeButton{
+
+            }
+            .threeAndVoice{
+                display: block;
+                width: 80%;
+                margin: 0 auto;
+            }
+            .lrc{
+                display: inline-block;
+                width: 200px;
+                height: 200px;
+                margin: 10% 3%;
+                text-align: center;
+                line-height:200px;
+                overflow: hidden;
+
+            }
+            .ani{
+                width: 200px;
+                height: 200px;
+            }
+            .smallCir{
+                width: 100px;
+                height: 100px;
+                margin: 50px;
+            }
+            .smallImg{
+                width: 100px;
+                height: 100px;
             }
         }
     </style>

@@ -15,13 +15,14 @@ export default class ListExampleSimple extends React.Component{
         super(props);
 
     }
-    handleChange(cur){
+    handleChange(cur,id){
 
         if(this.props.currentMusic==cur) {
 
 
         }else{
-            this.props.handleChangeMusic(cur);
+            this.props.handleChangeMusic(cur,id);
+
             if(!this.props.isLoading){
                 this.props.MusicPlay();
 
@@ -38,11 +39,9 @@ export default class ListExampleSimple extends React.Component{
                 <List>
 
                     {
-                    this.props.musicList.map((item,indx)=><ListItem primaryText={item.songName} key={indx} onTouchTap={()=>this.handleChange(item.songName)}/>)
+                    this.props.musicList.map((item,indx)=><ListItem primaryText={item.songName} key={indx} onTouchTap={()=>{
+                        this.handleChange(item.songName,item.idx)}}/>)
                 }
-
-
-
 
                 </List>
 
